@@ -4,48 +4,48 @@
 Answer :-
 select * from employees
 where salary < 70000;
-
+----------------------------------------------------------------------------------
 2.Fetch employees from enginneering department ??
 Answer :-
 select * from employees
 where department = 'enginneering';
-
+---------------------------------------------------------------------------
 3.Fetch all employees expect from HR Department 
 Answer :-
 select * from employees
 where Department <> 'HR" ;-----------Explnaation :- (<> is a symbol not exists)
-
+-----------------------------------------------------------------------------
 4.Fetch ditinct Department names ??
 Answer :-
 select Distinct(department) from employees;
-
+------------------------------------------------------------------------------
 5. Renaming A coloumn In Exisiting Table ??
 Answer :-
 Alter Table employees 
 rename coloumn name to Full_name ;----(Explanataion :- to rename the coloumn name we use this syntax )
-
+----------------------------------------------------------------------------------------------------------------
 6.Count total employees ??
 Answer :- 
 select count(*) as Total_ count  from employees ;
--------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------
 7.Count Employees In each department ?? --****
 Answer :-
 select department , count(*) as Emp_count 
  from employees ---                            -( Here we need to count total employees from each department )
 group by departement ;
-------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
 8.write a query to display employee_id , employee name and 
 salary by increasing the salary of 10000 for each employee ??
 Answer :-
 select employee_id , employee name ,
 salary ,salary+10000
 from employees ;
---------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
 9.write a query to display employee id , department and salary by giving the hike of 20% ??
 Answer :-
 select employee id,department ,salary ,round(salary+(salary*20/100),0)
 from employees 
--------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------
 10. HR 
 WHich department has the highest average salary ??
 or
@@ -58,7 +58,7 @@ select department , round(avg(salary),0) as Highest average salary
 from employees
 group by department 
 order by salary desc;
----------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 11.Find Departments where average salary exceeds 80,000 ??
 Answer :-
 use hr
@@ -66,7 +66,7 @@ select Department , avg(Salary) as Average salary
 from employees
 group by Department;
 Having Average salary > 80000;
-----------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 12.Write a query to display details of employees working  in sales or 
 HR department */ ??
 Answer :-
@@ -78,42 +78,42 @@ department = 'hr';
 method -2 
 select * from employees
 where department in ( 'sales','hr');
---------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
 13.Write a query to display the details of employees earning in the 
 Range of 80000 to 90000
 Answer :-
 select * from employees
 where salary between (80000 and  90000);
------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
 14.Display employee name , country ,gender , and position title for every employee
 whose job title contains "manager/??
 Answer :-
 select name,country,gender,position title
 from employees
 where position title like %manager%;
-------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------
 15. write an sql query to retrieve all unique country names from a table1 ?
 Answer :-
 select distinct (country) from employees
-
+                         --------------------- 
 2- write a sql query to count unique countries excluding dulicate and null values ??
 Answer :-
 select count(distinct country) from employees;
--------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
 16.write a sql query to find all employees whose salary is missing but a country has already assigned ??
 Answer :-
 select * from employees
 where salary is null 
 and 
 country is not null;
---------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
 17. write  a query to fetch the top 3 higest salary records (ignore nulls salaries)??
 Answer :-
 select * from employees 
 where salary  is not null
 order by salary desc 
 limit 3;
-----------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------
 18. what is the difference between 
 count(1) , count(*) , count('x'), count(cloumn)
 ANswer :-
@@ -124,12 +124,12 @@ select count(1) from employees ;
 select count('x') from employees; 
 
 select count(salary) from employees;
-------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
 19.write a query to display the employees id , employee name , and annual salary of each department ??
 Answer :-
 select id , employee name ,salary , salary*12 as annual salary ----------(note annual salary is *12 with salary )
 from employees;
----------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------
 20.write a query to return all employees whose names start with the letter 'A'??
 Answer :-
 select * from employees 
@@ -141,7 +141,7 @@ select employee name , department , posiition title , count(*)as duplicate_colou
 from employees
 group by employee name , department , posiition title 
 having count(1)>1;
---------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------
  22.Retrive the second highest salary without using top or limit ?
  Answer :-
 select max(salary) as second_highest_salary 
@@ -170,14 +170,14 @@ over(
     select Employee_Name , salary, department 
     row_number() over( partition by department order by salary desc)
     from employees;
----------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------
 24.Display each transition along with the cumulative (running_total) of sales amount, ordered by sale date and order ID */??
 answer :-
 select  sale_date , order_id , Amount
 sum(amount) over(order by sale_date , order_id) as running_total 
 from sales;
 Note :- Running_total = sum() +over()
--------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------
 ------------- row_number() vs Rank() vs dense_rank() -----------------------(importnat question)
 
 25. How would you assign ranks when there are duplicate salaries ??
@@ -197,7 +197,7 @@ select emloyee_name , salary
 DENSE_RANK() over(order by salary desc) as RNk ------------Note :-No gaps in the sequence; the next rank is always consecutive (1, 1, 2, 3, ...).
 from employees
 
----------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------
 26. Compare  current value with previous 
 
 /* Retrive employee salary history showing the current and immediately prceeding 
@@ -207,7 +207,7 @@ select ID , employee_name , month_no , salary
 Lag(salary )                     --------------------------(Lag) is a syntax for previous month ...
 over(partiton by Id order by month_no) as previous_salary 
 from employees ;
-------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------
 27./* find top 3 employees by salary in each department 
 Note :- If two employees share same salary list time as well*/??
 Answer :-
@@ -224,7 +224,7 @@ we can also use subquery ------------------
 Note :- This SQL query aims to find employees who have the 3rd highest salary within their respective departments.
  However, the provided query will fail because window functions (like rank()) cannot be used directly in a WHERE clause. 
  A subquery or Common Table Expression (CTE) is required to filter by the rank. 
- -----------------------------------------------------------------------------------------------------------------
+ -----------------------------------------------------------------------------------------------------------------------------
  28. List all the employess whose salary higher than the company's average salary ??
  Answer :-
  
@@ -254,7 +254,7 @@ WHERE e1.salary = (
     FROM employees e2
     WHERE e2.department_name = e1.department_name
 );
-_-------------------------------------------------------------------------------------------------------------------
+_-------------------------------------------------------------------------------------------------------------------------------------------------
 30.Display the employee's full name along with department and salary , ensuring the full name is shown even when last_name
 is  NULL??
 answer :-
@@ -359,7 +359,7 @@ ANswer :-
 select timestampdiff(hour ,order_date , order_time) as total_hours
 from employees
 where  timestampdiff(hour ,order_date , order_time)>12 ;
-----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 1) LAST_DAY () , SYNTAX :- LAST_DAY(DATE)
 SELECT LAST_DAY(CURDATE());----------IT WILL RETURN'S LAST DAY OF THE MONTH 
 
@@ -373,7 +373,7 @@ SELECT DATE_ADD(CURDATE(), INTERVAL -7 DAY);
 3) DATE_FORMAT()
 --SYNTAX, DATE_FORMAT(DATE , FORMAT_STRING)
 SELECT DATE_FORMAT(CURDATE() ,'%D'-'%M'-'%Y');
----------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
 39. /* Management wants to clasify employees as :
 High salary , Medium salary , low salary */??
 Answer :-
@@ -396,4 +396,4 @@ then 'Medium salary'
 ELSE 'LOW SALARY'
 END AS SALARY_CATEGORY 
 FROM EMPLOYEES ;
---------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
